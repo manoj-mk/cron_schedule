@@ -1,0 +1,17 @@
+*{
+    font-family: Georgia, serif;
+}
+.result_container{
+    height: 100px;
+    margin: 20px auto;
+    width: 40%;
+}
+.result_content{
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
+    color: #130f0fca;
+    text-align: center;
+    font-size: 200%;
+    box-sizing: border-box;
+}

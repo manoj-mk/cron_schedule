@@ -1,0 +1,9 @@
+.validator{
+    display: flex;
+    justify-content: center;
+}
+.validator_item{
+    padding: 0 5px;
+    margin: 8px;
+    color: white;
+}

@@ -1,0 +1,37 @@
+.result h1 {
+    text-align: center;
+}
+.expression{
+    display: flex;
+    justify-content: center;
+}
+.expression input{
+  background-color: rgba(17, 17, 16, 0.877);
+  border-color: rgb(204, 204, 204);
+  border-radius: 30px;
+  border-style: solid;
+  border-width: 1px;
+  color: rgb(255, 255, 255);
+  display: inline-block;
+  font-size: 50px;
+  gap: normal;
+  padding: 1.5px 2px 1px;
+  text-align: center;
+  outline: none;
+}
+.rules{
+    display: flex;
+    justify-content: center;
+}
+li{
+    list-style-type: none;
+    padding: 5px 90px;
+    border-bottom: solid 1px black  ;
+}
+.landing_pages{
+    margin: auto;
+}
+.landing_page_links{
+    padding: 10px;
+    margin: 10px;
+}
