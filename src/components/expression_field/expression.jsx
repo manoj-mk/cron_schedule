@@ -3,6 +3,7 @@ import styles from "./expression.module.css";
 import Validator from "../validator/validator";
 import ExpResult from "../expression_result/expresult";
 import helper from "../helper/helper";
+import Rule from '../rules/rules';
 class Expression extends Component {
   state = {
     expression: "",
@@ -36,7 +37,7 @@ class Expression extends Component {
   };
   handleExamples = (e) => {
     e.preventDefault();
-  };
+  };  
   render() {
     return (
       <>
@@ -61,10 +62,11 @@ class Expression extends Component {
         <Validator isMatchArray={this.state.isMatchArray} current={this.state.current} />
         <div className={styles.rules}>
           <ul>
-            <li>* any value</li>
-            <li>- range of values</li>
-            <li>/ step values</li>
+            <li><span>*</span> any value</li>
+            <li><span>-</span> range of values</li>
+            <li><span>/</span> step values</li>
           </ul>
+          <Rule active={this.state.current} />
         </div>
         <div className={styles.description}>
           We created Cronitor because cron itself can't alert you if your jobs

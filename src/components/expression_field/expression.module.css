@@ -21,12 +21,21 @@
 }
 .rules{
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 200px;
+    margin-top: 20px;
 }
 li{
     list-style-type: none;
     padding: 5px 90px;
+    text-align: center;
     border-bottom: solid 1px black  ;
+}
+ul{
+    margin: 0;
+    padding: 0;
+    min-width: 450px;
 }
 .landing_pages{
     margin: auto;
