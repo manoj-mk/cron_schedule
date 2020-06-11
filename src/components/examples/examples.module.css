@@ -1,0 +1,13 @@
+.examples{
+    display: flex;
+    justify-content: center;
+}
+.examples_left{
+    display: flex;
+    flex-direction: column;
+}
+
+.examples_right{
+    display: flex;
+    flex-direction: column;
+}

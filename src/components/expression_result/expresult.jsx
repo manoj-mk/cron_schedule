@@ -9,7 +9,7 @@ const ExpResult = ({ expression, isAllMatched, current }) => {
         <div className={styles.result_container}></div>
       </>
     );
-  let [time,month] = helper.getReadableExpression(expression);
+  let [time,month] = expression? helper.getReadableExpression(expression):"";
   return (
     <>
       <div className={styles.result_container}>

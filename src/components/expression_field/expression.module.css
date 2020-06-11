@@ -30,6 +30,9 @@ li{
     list-style-type: none;
     padding: 5px 90px;
     text-align: center;
+
+}
+.rules_item{
     border-bottom: solid 1px black  ;
 }
 ul{

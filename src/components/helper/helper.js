@@ -1,6 +1,6 @@
 const getReadableExpression = (expression) => {
+  if(!expression) return [null];
   let expArray = expression.split(" ").filter(i=>i);
-  console.log(expArray);
   let time, month;
   let days = {
     SUN: "Sunday",

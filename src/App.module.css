@@ -3,3 +3,8 @@
     flex-direction: column;
     justify-content: center;
 }
+.example_link{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}

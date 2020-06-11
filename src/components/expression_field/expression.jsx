@@ -4,6 +4,7 @@ import Validator from "../validator/validator";
 import ExpResult from "../expression_result/expresult";
 import helper from "../helper/helper";
 import Rule from '../rules/rules';
+import Example from "../examples/examples";
 class Expression extends Component {
   state = {
     expression: "",
@@ -23,6 +24,10 @@ class Expression extends Component {
     }
     this.setState({ isMatchArray: result });
   };
+  static getDerivedStateFromProps(nextProps,prevProps){
+    console.log("in compo",nextProps.expression,nextProps.isAllMatched);
+    return ({expression:nextProps.expression,isAllMatched:nextProps.isAllMatched});
+  }
   handlePos = (e) => {
     const ind = e.target.selectionStart;
     let exp = this.state.expression;
@@ -35,9 +40,9 @@ class Expression extends Component {
     else tar=0;
     this.setState({current:tar});
   };
-  handleExamples = (e) => {
-    e.preventDefault();
-  };  
+  handleExamples = ({expression,isAllMatched}) => {
+    this.setState({expression,isAllMatched});
+  };
   render() {
     return (
       <>
@@ -62,9 +67,9 @@ class Expression extends Component {
         <Validator isMatchArray={this.state.isMatchArray} current={this.state.current} />
         <div className={styles.rules}>
           <ul>
-            <li><span>*</span> any value</li>
-            <li><span>-</span> range of values</li>
-            <li><span>/</span> step values</li>
+            <li className={styles.rules_item} ><span>*</span> any value</li>
+            <li className={styles.rules_item} ><span>-</span> range of values</li>
+            <li className={styles.rules_item} ><span>/</span> step values</li>
           </ul>
           <Rule active={this.state.current} />
         </div>
@@ -74,11 +79,7 @@ class Expression extends Component {
           with instant alerts when things go wrong. Learn more about cron job
           monitoring.
         </div>
-        <div className={styles.landing_pages}>
-          {/* <Link to="/examples">
-            examples
-          </Link> */}
-        </div>
+
       </>
     );
   }
