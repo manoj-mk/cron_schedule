@@ -1,13 +1,21 @@
 .examples{
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
+    
+    margin-top: 80px;
+    margin-left: 32%;
 }
 .examples_left{
     display: flex;
     flex-direction: column;
-}
+    }
 
 .examples_right{
     display: flex;
     flex-direction: column;
+}
+.example_link{
+    /* padding: 10px; */
+    margin: 10px 0;
+
 }

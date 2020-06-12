@@ -47,8 +47,8 @@ const getReadableExpression = (expression) => {
   if (expArray[0] === "*" && expArray[1] === "*") time = "every minute  ";
   else if (expArray[0] === "*")
     time = "every minute past hour " + expArray[1];
-  else if (expArray[1] === "*") time = "minute " + expArray[0];
-  else time = "" + expArray[1] + ":" + expArray[0];
+  else if (expArray[1] === "*") time = "minute " + (expArray[0]<"10"?"0"+expArray[0]:expArray[0]);
+  else time = "" + (expArray[1]<"10"?"0"+expArray[1]:expArray[1]) + ":" + (expArray[0]<"10"?"0"+expArray[0]:expArray[0]);
   if (expArray[2] === "*") month = "";
   else month = " on day-of-month " + expArray[2];
   if (expArray[4] === "*");

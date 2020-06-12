@@ -8,11 +8,15 @@ import Example from "../examples/examples";
 class Expression extends Component {
   state = {
     expression: "",
-    isMinuteMatched: false,
     isMatchArray: [],
     isAllMatched: false,
     current: 0,
   };
+  UNSAFE_componentWillMount(){
+    if(this.props.expression){
+      this.setState({expression:this.props.expression,isAllMatched:this.props.isAllMatched,isMatchArray:[true,true,true,true,true]});
+    }
+  }
   handleChange = (e) => {
     this.setState({ expression: e.target.value });
     let result, matchCount;
@@ -24,10 +28,7 @@ class Expression extends Component {
     }
     this.setState({ isMatchArray: result });
   };
-  static getDerivedStateFromProps(nextProps,prevProps){
-    console.log("in compo",nextProps.expression,nextProps.isAllMatched);
-    return ({expression:nextProps.expression,isAllMatched:nextProps.isAllMatched});
-  }
+
   handlePos = (e) => {
     const ind = e.target.selectionStart;
     let exp = this.state.expression;
@@ -40,9 +41,7 @@ class Expression extends Component {
     else tar=0;
     this.setState({current:tar});
   };
-  handleExamples = ({expression,isAllMatched}) => {
-    this.setState({expression,isAllMatched});
-  };
+
   render() {
     return (
       <>
