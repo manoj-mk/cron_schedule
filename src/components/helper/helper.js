@@ -1,5 +1,6 @@
 const getReadableExpression = (expression) => {
   if (!expression) return [null];
+  console.log("expression is ", expression);
   let expArray = expression.split(" ").filter((i) => i);
   let time, month;
   let days = {
@@ -67,7 +68,7 @@ const checkForMatch = (exp) => {
   //minute hour date month day(week)
   let minute_digits = "[1-5]?[\\d]";
   let minute_regex = new RegExp(
-    `^((${minute_digits})|(\\*)|(\\*\\/${minute_digits})|(${minute_digits}\\/${minute_digits})|(${minute_digits}-${minute_digits}))$`,
+    `^((${minute_digits})|(\\*)|(\\*\\/${minute_digits}|${minute_digits}\\/${minute_digits})|(${minute_digits}-${minute_digits}))$`,
     "i"
   );
   let hour_digits = "([2][0-3])|([1]?[\\d])";
@@ -85,14 +86,11 @@ const checkForMatch = (exp) => {
     `^(${month_digits}|(${month_digits}\\/${month_digits})|(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC|\\*)|(\\*\\/${month_digits})|(${month_digits}-${month_digits}))$`,
     "i"
   );
-  let day_regex = new RegExp(`^([0-6]|(SUN|MON|TUE|WED|THUR|FRI|SAT|\\*)|([0-6]-[0-6])|(\\*\\/[0-6])|([0-6]\\/[0-6]))$`, "i");
-  let regex = [
-    minute_regex,
-    hour_regex,
-    date_regex,
-    month_regex,
-    day_regex,
-  ];
+  let day_regex = new RegExp(
+    `^([0-6]|(SUN|MON|TUE|WED|THUR|FRI|SAT|\\*)|([0-6]-[0-6])|(\\*\\/[0-6])|([0-6]\\/[0-6]))$`,
+    "i"
+  );
+  let regex = [minute_regex, hour_regex, date_regex, month_regex, day_regex];
   let arr = exp.split(" ").filter((i) => i);
   let result = [false, false, false, false, false];
   let matchCount = 0;
@@ -100,14 +98,19 @@ const checkForMatch = (exp) => {
     let evalV = e.match(regex[i]);
     if (i > 5) {
       matchCount = 0;
+      result[i] = false;
     }
     if (evalV) {
-      if (i === 0 && evalV[4]) {
+      if (evalV[0].match(/-/)) {
+        let a = evalV[0].split("-");
+        if (parseInt(a[0]) <= parseInt(a[1])) {
+          result[i] = true;
+          matchCount += 1;
+        }
+      } else {
+        result[i] = true;
+        matchCount += 1;
       }
-      result[i] = true;
-      matchCount += 1;
-    } else {
-      result[i] = false;
     }
   });
   return [result, matchCount];
