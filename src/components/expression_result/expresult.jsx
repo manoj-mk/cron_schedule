@@ -9,11 +9,20 @@ const ExpResult = ({ expression, isAllMatched, current }) => {
         <div className={styles.result_container}></div>
       </>
     );
-  let [time,month] = expression? helper.getReadableExpression(expression):"";
+  let [min,h, d, mon, dy] = expression
+    ? helper.getReadableExpression(expression)
+    : "";
   return (
     <>
       <div className={styles.result_container}>
-        <h1 className={styles.result_content}>At {time + month} </h1>
+        <h1 className={styles.result_content}>
+          At 
+          <span style={{color:(current===0)?"green":""}} >{min}</span>
+          <span style={{color:(current===1)?"green":""}} >{h}</span>
+          <span style={{color:(current===2)?"green":""}} >{d}</span>
+          <span style={{color:(current===4)?"green":""}} >{dy}</span>
+          <span style={{color:(current===3)?"green":""}} >{mon}</span>
+        </h1>
       </div>
     </>
   );

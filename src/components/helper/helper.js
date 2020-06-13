@@ -1,19 +1,19 @@
-let opers = ["minute", "hour"];
-let op_values = ["59","23"];
+let opers = ["minute", "hour","day-of-month",""];
+let op_values = ["59","23","31",""];
 const dash = (exp, num) => {
   let arr = exp.split("-");
   let one = arr[0];
   let two = arr[1];
-  return "every " + opers[num] + " from " + one + " through " + two+" ";
+  return " every " + opers[num] + " from " + one + " through " + two+" ";
 };
 const backslash = (one, two, num) => {
-  return "every " + two + " " + opers[num] + " from " + one + " through "+op_values[num]+" ";
+  return " every " + two + " " + opers[num] + " from " + one + " through "+op_values[num]+" ";
 };
 const getReadableExpression = (expression) => {
   if (!expression) return [null];
   console.log("expression is ", expression);
   let expArray = expression.split(" ").filter((i) => i);
-  let time, month;
+  let month;
   let days = {
     SUN: "Sunday",
     MON: "Monday",
@@ -64,19 +64,19 @@ const getReadableExpression = (expression) => {
     mh_flag = 0;
   // minute
   if (expArray[0] === "*") {
-    m = "every minute ";
+    m = " every minute ";
   } else if (expArray[0].match(/-/)) {
     m = dash(expArray[0], 0);
   } else if (expArray[0].match(/\//)) {
     let arr = expArray[0].split("/");
     if (arr[0] === "*") {
-      m = "every " + arr[1] + " minute ";
+      m = " every " + arr[1] + " minute ";
     } else m = backslash(arr[0], arr[1], 0);
   } else {
     if (expArray[1].match(/^[^*\/-]+$/)) {
       m = expArray[0] < "10" ? "0" + expArray[0] : expArray[0];
     } else {
-      m = "every minute " + expArray[0]+" ";
+      m = " every minute " + expArray[0]+" ";
     }
   }
   console.log(m);
@@ -94,22 +94,55 @@ const getReadableExpression = (expression) => {
   } else {
     if (expArray[0].match(/^[^*\/-]+$/)) {
       h = expArray[1] < "10" ? "0" + expArray[1] : expArray[1];
-      h = h + ":";
+      h = " "+ h + ":";
       mh_flag = 1;
     } else h = "past hour " + expArray[1];
   }
-  console.log("-------", m, h);
-  if (expArray[0] === "*" && expArray[1] === "*") time = " every minute  ";
-  else if (expArray[0] === "*") time = " every minute past hour " + expArray[1];
-  else if (expArray[1] === "*")
-    time = " minute " + (expArray[0] < "10" ? "0" + expArray[0] : expArray[0]);
-  else
-    time =
-      "" +
-      (expArray[1] < "10" ? "0" + expArray[1] : expArray[1]) +
-      ":" +
-      (expArray[0] < "10" ? "0" + expArray[0] : expArray[0]);
-
+  // date 
+  if(expArray[2]==="*"){
+    d = ""
+  }
+  else if(expArray[2].match(/\-/)){
+    d = dash(expArray[2],2);
+  }
+  else if(expArray[2].match(/\//)){
+    let arr = expArray[2].split("/");
+     d = "" +backslash(arr[0], arr[1], 2);
+  }
+  else{
+    d = " on day-of-month "+ expArray[2]+" ";
+  }
+// month 
+  if(expArray[3]==="*"){
+    mon = ""
+  }
+  else if(expArray[3].match(/-/)){
+    let arr = expArray[3].split("-");
+    mon = " in every month from "+ months[arr[0]]+ " through "+ months[arr[1]]+" ";
+  }
+  else if(expArray[3].match(/\//)){
+    let arr = expArray[3].split("/");
+    mon = " in every "+ arr[1]+" month from "+ months[arr[0]]+ " through December ";
+  }
+  else{
+    mon = " in "+ months[expArray[3]]+" ";
+  }
+  //day 
+  if(expArray[4]==="*"){
+    dy = ""
+  }
+  else if(expArray[4].match(/-/)){
+    let arr = expArray[4].split("-");
+    dy = " on every day-of-week from "+ days[arr[0]] +" through "+ days[arr[1]];
+  }
+  else if(expArray[4].match(/\//)){
+    let arr = expArray[4].split("/");
+    dy = " on every "+ arr[1]+" day-of-week from "+ days[arr[0]] + " through Sunday ";
+  }
+  else {
+    dy = " on "+ days[expArray[4]]+" ";
+  }
+  console.log("-------", m, h,d,mon,dy);
   if (expArray[2] === "*") month = "";
   else month = " on day-of-month " + expArray[2];
   if (expArray[4] === "*");
@@ -117,9 +150,9 @@ const getReadableExpression = (expression) => {
   if (expArray[3] === "*");
   else month += " in " + months[expArray[3].toUpperCase()];
   if (mh_flag) {
-    return [h + m, month];
+    return [h , m, d,mon,dy];
   }
-  return [m + h, month];
+  return [m , h, d,mon,dy];
 };
 const checkForMatch = (exp) => {
   //minute hour date month day(week)

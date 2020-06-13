@@ -7,18 +7,18 @@ const Example = () => {
         <h1 style={{textAlign:"center"}} >Examples</h1>
       <div className={styles.examples}>
         <ul className={styles.examples_left}>
-          <Link className={styles.example_link}  to="examples/1 * * * *" >every 1 minute </Link>
-          <Link className={styles.example_link}  to="examples/* * * * *" >At every minute</Link>
-          <Link className={styles.example_link}  to="examples/2 * * * *" > every 2 minute </Link>
-          <Link className={styles.example_link} > every sunday </Link>
-          <Link className={styles.example_link} > every monday </Link>
+          <Link className={styles.example_link}  to="examples/* * * * *" >every minute </Link>
+          <Link className={styles.example_link}  to="examples/*^1 * * * *" >every 1 minute</Link>
+          <Link className={styles.example_link}  to="examples/*^2 * * * *" > every 2 minute </Link>
+          <Link className={styles.example_link} to="examples/0 0 * * SUN" > every sunday </Link>
+          <Link className={styles.example_link} to="examples/0 0 * * MON" > every monday </Link>
         </ul>
         <ul className={styles.examples_right}>
-          <Link className={styles.example_link} >every weekday</Link>
-          <Link className={styles.example_link} >every month </Link>
-          <Link className={styles.example_link} > daily </Link>
-          <Link className={styles.example_link} > every  morning </Link>
-          <Link className={styles.example_link} > every midnight </Link>
+          <Link className={styles.example_link} to="examples/0 0 * * 1-5" >Monday to friday</Link>
+          <Link className={styles.example_link} to="examples/0 0 1 * *" >every month </Link>
+          <Link className={styles.example_link} to="examples/0 0 * * 0" > Weekly </Link>
+          <Link className={styles.example_link} to="examples/0 9 * * * " > every  morning </Link>
+          <Link className={styles.example_link} to="examples/0 0 * * *" > Daily </Link>
         </ul>
       </div>
     </>

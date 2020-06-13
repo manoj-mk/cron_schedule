@@ -4,8 +4,8 @@ import styles from './App.module.css';
 import {Link} from 'react-router-dom';
 import Example from './components/examples/examples';
 function App({match,location}) {
-  const expression = match.params.example;
-  console.log("IN app",expression);
+  let expression = match.params.example;
+  if(expression){expression = expression.replace("^","/");}
   
   return (
     <div className={styles.App}>
