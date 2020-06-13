@@ -2,7 +2,7 @@
     font-family: Georgia, serif;
 }
 .result_container{
-    height: 100px;
+    min-height: 100px;
     margin: 20px auto;
     width: 40%;
 }
