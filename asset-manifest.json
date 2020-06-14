@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/cron_schedule/static/css/main.fe49eb09.chunk.css",
+    "main.js": "/cron_schedule/static/js/main.ee014ca3.chunk.js",
+    "main.js.map": "/cron_schedule/static/js/main.ee014ca3.chunk.js.map",
+    "runtime-main.js": "/cron_schedule/static/js/runtime-main.0d6146e7.js",
+    "runtime-main.js.map": "/cron_schedule/static/js/runtime-main.0d6146e7.js.map",
+    "static/js/2.575a175f.chunk.js": "/cron_schedule/static/js/2.575a175f.chunk.js",
+    "static/js/2.575a175f.chunk.js.map": "/cron_schedule/static/js/2.575a175f.chunk.js.map",
+    "index.html": "/cron_schedule/index.html",
+    "precache-manifest.0a53deb9e79363131e409b4b8328a416.js": "/cron_schedule/precache-manifest.0a53deb9e79363131e409b4b8328a416.js",
+    "service-worker.js": "/cron_schedule/service-worker.js",
+    "static/css/main.fe49eb09.chunk.css.map": "/cron_schedule/static/css/main.fe49eb09.chunk.css.map",
+    "static/js/2.575a175f.chunk.js.LICENSE.txt": "/cron_schedule/static/js/2.575a175f.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0d6146e7.js",
+    "static/js/2.575a175f.chunk.js",
+    "static/css/main.fe49eb09.chunk.css",
+    "static/js/main.ee014ca3.chunk.js"
+  ]
+}
