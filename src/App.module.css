@@ -1,10 +1,13 @@
+
 .App{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    font-family: Georgia, serif;
 }
-.example_link{
+.examples_link{
     display: flex;
     justify-content: center;
     margin-top: 15px;
 }
+  

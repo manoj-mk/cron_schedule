@@ -4,16 +4,17 @@
 .expression{
     display: flex;
     justify-content: center;
+    font-family: 'Times New Roman', Times, serif;
 }
 .expression input{
-  background-color: rgba(17, 17, 16, 0.877);
+  background-color: rgba(17, 17, 16, 0.781);
   border-color: rgb(204, 204, 204);
   border-radius: 30px;
   border-style: solid;
   border-width: 1px;
   color: rgb(255, 255, 255);
   display: inline-block;
-  font-size: 50px;
+  font-size: 250%;
   gap: normal;
   padding: 1.5px 2px 1px;
   text-align: center;
@@ -26,24 +27,52 @@
     height: 200px;
     margin-top: 20px;
 }
-li{
-    list-style-type: none;
-    padding: 5px 90px;
-    text-align: center;
 
-}
 .rules_item{
     border-bottom: solid 1px black  ;
+    list-style-type: none;
+    padding: 5px 20px;
+    text-align: center;
 }
-ul{
+.exp_ul{
     margin: 0;
     padding: 0;
-    min-width: 450px;
+    min-width: 250px;
 }
+
 .landing_pages{
     margin: auto;
 }
 .landing_page_links{
     padding: 10px;
     margin: 10px;
+}
+.description{
+    text-align: center  ;
+    margin-bottom: 10px;
+}
+
+.expression_container{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+
+}
+@media screen and (max-width: 400px) {
+    input{
+        width: 100%;
+        font-size: 200%;
+    }
+    .expression_container{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 800px) {
+    input{
+        width: 100%;
+        font-size: 200%;
+    }
+    .expression_container{
+        width: 100%;
+    }
 }

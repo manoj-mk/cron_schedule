@@ -1,6 +1,4 @@
-*{
-    font-family: Georgia, serif;
-}
+
 .result_container{
     min-height: 100px;
     margin: 20px auto;
@@ -10,8 +8,26 @@
     max-height: 100%;
     margin: 0;
     padding: 0;
-    color: #130f0fca;
+    color: #32c425e5;
     text-align: center;
     font-size: 200%;
     box-sizing: border-box;
+}
+@media screen and (max-width: 400px) {
+    .result_container{
+        width: 100%;
+        height: auto;
+    }
+    .result_content{
+        font-size: 150%;
+    }
+}
+@media screen and (max-width: 800px) {
+    .result_container{
+        width: 100%;
+        height: auto;
+    }
+    .result_content{
+        font-size: 150%;
+    }
 }

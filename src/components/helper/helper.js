@@ -1,5 +1,11 @@
 let opers = ["minute", "hour","day-of-month",""];
+let suffix = {0:"th",1:"st",2:"nd",3:"rd",4:"th",5:"th",6:"th",7:"th",8:"th",9:"th"};  
 let op_values = ["59","23","31",""];
+const add_suffix=(num)=>{
+  let last = parseInt(num)%10;
+  return num+suffix[last];
+
+}
 const dash = (exp, num) => {
   let arr = exp.split("-");
   let one = arr[0];
@@ -7,11 +13,10 @@ const dash = (exp, num) => {
   return " every " + opers[num] + " from " + one + " through " + two+" ";
 };
 const backslash = (one, two, num) => {
-  return " every " + two + " " + opers[num] + " from " + one + " through "+op_values[num]+" ";
+  return " every " + add_suffix(two) + " " + opers[num] + " from " + one + " through "+op_values[num]+" ";
 };
-const getReadableExpression = (expression) => {
+  const getReadableExpression = (expression) => {
   if (!expression) return [null];
-  console.log("expression is ", expression);
   let expArray = expression.split(" ").filter((i) => i);
   let month;
   let days = {
@@ -70,16 +75,15 @@ const getReadableExpression = (expression) => {
   } else if (expArray[0].match(/\//)) {
     let arr = expArray[0].split("/");
     if (arr[0] === "*") {
-      m = " every " + arr[1] + " minute ";
+      m = " every " + add_suffix(arr[1]) + " minute ";
     } else m = backslash(arr[0], arr[1], 0);
   } else {
     if (expArray[1].match(/^[^*\/-]+$/)) {
-      m = expArray[0] < "10" ? "0" + expArray[0] : expArray[0];
+      m = parseInt(expArray[0]) < 10 ? "0" + expArray[0] : expArray[0];
     } else {
-      m = " every minute " + expArray[0]+" ";
+      m = " minute " + expArray[0]+" ";
     }
   }
-  console.log(m);
   // hour
   if (expArray[1] === "*") {
     h = "";
@@ -89,11 +93,11 @@ const getReadableExpression = (expression) => {
   } else if (expArray[1].match(/\//)) {
     let arr = expArray[1].split("/");
     if (arr[0] === "*") {
-      h = " past every " + arr[1] + " hour ";
+      h = " past every " + add_suffix(arr[1]) + " hour ";
     } else h = " past " +backslash(arr[0], arr[1], 1);
   } else {
     if (expArray[0].match(/^[^*\/-]+$/)) {
-      h = expArray[1] < "10" ? "0" + expArray[1] : expArray[1];
+      h = parseInt(expArray[1]) < 10 ? "0" + expArray[1] : expArray[1];
       h = " "+ h + ":";
       mh_flag = 1;
     } else h = "past hour " + expArray[1];
@@ -107,7 +111,10 @@ const getReadableExpression = (expression) => {
   }
   else if(expArray[2].match(/\//)){
     let arr = expArray[2].split("/");
-     d = "" +backslash(arr[0], arr[1], 2);
+    if(arr[0]==="*"){
+        d = " on every "+add_suffix(arr[1])+" day-of-month ";
+    } 
+     else d = " " +backslash(arr[0], arr[1], 2);
   }
   else{
     d = " on day-of-month "+ expArray[2]+" ";
@@ -118,14 +125,17 @@ const getReadableExpression = (expression) => {
   }
   else if(expArray[3].match(/-/)){
     let arr = expArray[3].split("-");
-    mon = " in every month from "+ months[arr[0]]+ " through "+ months[arr[1]]+" ";
+    mon = " in every month from "+ months[arr[0].toUpperCase()]+ " through "+ months[arr[1].toUpperCase()]+" ";
   }
   else if(expArray[3].match(/\//)){
     let arr = expArray[3].split("/");
-    mon = " in every "+ arr[1]+" month from "+ months[arr[0]]+ " through December ";
+    if(arr[0]==="*"){
+      mon = " in every "+ add_suffix(arr[1]) +" month ";
+    }
+    else mon = " in every "+ add_suffix(arr[1])+" month from "+ months[arr[0].toUpperCase()]+ " through December ";
   }
   else{
-    mon = " in "+ months[expArray[3]]+" ";
+    mon = " in "+ months[expArray[3].toUpperCase()]+" ";
   }
   //day 
   if(expArray[4]==="*"){
@@ -133,26 +143,24 @@ const getReadableExpression = (expression) => {
   }
   else if(expArray[4].match(/-/)){
     let arr = expArray[4].split("-");
-    dy = " on every day-of-week from "+ days[arr[0]] +" through "+ days[arr[1]];
+
+    dy = " on every day-of-week from "+ days[arr[0].toUpperCase()] +" through "+ days[arr[1].toUpperCase()];
   }
   else if(expArray[4].match(/\//)){
     let arr = expArray[4].split("/");
-    dy = " on every "+ arr[1]+" day-of-week from "+ days[arr[0]] + " through Sunday ";
+    if(arr[0]==="*"){
+      dy = " on every "+ add_suffix(arr[1])+ " day-of-week ";
+    }
+    else dy = " on every "+ add_suffix(arr[1])+" day-of-week from "+ days[arr[0].toUpperCase()] + " through Sunday ";
   }
   else {
-    dy = " on "+ days[expArray[4]]+" ";
+    dy = " on "+ days[expArray[4].toUpperCase()]+" ";
   }
-  console.log("-------", m, h,d,mon,dy);
-  if (expArray[2] === "*") month = "";
-  else month = " on day-of-month " + expArray[2];
-  if (expArray[4] === "*");
-  else month += " and on " + days[expArray[4].toUpperCase()];
-  if (expArray[3] === "*");
-  else month += " in " + months[expArray[3].toUpperCase()];
+
   if (mh_flag) {
-    return [h , m, d,mon,dy];
+    return [h , m, d,mon,dy,1];
   }
-  return [m , h, d,mon,dy];
+  return [m , h, d,mon,dy,0];
 };
 const checkForMatch = (exp) => {
   //minute hour date month day(week)

@@ -1,6 +1,7 @@
 .validator{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 .validator_item{
     padding: 0 5px;
