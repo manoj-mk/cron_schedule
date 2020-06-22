@@ -1,30 +1,32 @@
 import React from "react";
 import { Header, Expression } from "./components";
 import styles from "./App.module.css";
-import { Link, MemoryRouter as Router, Switch } from "react-router-dom";
+import { Link, Switch,Route } from "react-router-dom";
 import Example from "./components/examples/examples";
+import Cron from './components/cron/cron';
 function App({ match, location }) {
   let expression = "";
   if (match) {
     // expression = match ? match.params.example : null;
+    expression = match.params.example;
   }
   if (expression) {
     expression = expression.replace("^", "/");
   }
 
   return (
-    
-      <div className={styles.App}>
-        <Header />
-        <Expression expression={expression} isAllMatched={true} />
-          <div className={styles.examples_link}>
-          <Router>
-            <Link to="/examples">Examples</Link>
-          </Router>
-        </div>
-      </div>
-    
+
+     <>
+      <Switch>
+        <Route exact path="/examples" component={Example} />
+        <Route exact path="/" component={Cron} />
+        <Route path="/examples/:example" component={Cron} />
+      </Switch> 
+     </>
   );
+
+
+
 }
 
 export default App;
