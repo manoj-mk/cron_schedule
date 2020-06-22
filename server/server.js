@@ -10,7 +10,7 @@ import Examples from "../src/components/examples/examples.jsx";
 // const App = ()=>{
 // return(<h1>Hello manoj</h1>);
 // }
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(express.static("prod_build"));
