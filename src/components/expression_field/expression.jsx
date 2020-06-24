@@ -4,7 +4,6 @@ import Validator from "../validator/validator";
 import ExpResult from "../expression_result/expresult";
 import helper from "../helper/helper";
 import Rule from "../rules/rules";
-import Example from "../examples/examples";
 class Expression extends Component {
   state = {
     expression: "",
@@ -14,10 +13,19 @@ class Expression extends Component {
   };
   UNSAFE_componentWillMount() {
     if (this.props.expression) {
+      let result,matchCount;
+      let matched = this.props.isAllMatched;
+      [result, matchCount]=helper.checkForMatch(this.props.expression);
+      if(matchCount===5){
+        matched = true;
+      }
+      else{
+        matched = false;
+      }
       this.setState({
         expression: this.props.expression,
-        isAllMatched: this.props.isAllMatched,
         isMatchArray: [true, true, true, true, true],
+        isAllMatched: matched,
       });
     }
   }
@@ -89,7 +97,7 @@ class Expression extends Component {
           <Rule active={this.state.current} />
         </div>
         <div className={styles.description}>
-          Cronitor is easy to integrate and provides you with instant alerts
+          Cron is easy to integrate and provides you with instant alerts
           when things go wrong. Learn more about cron job monitoring.
         </div>
       </div>
